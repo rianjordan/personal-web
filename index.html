@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprian Ditia - Crypto Trader & Market Scalper</title>
+    <meta name="description" content="Professional crypto trader and market scalper specializing in precision trading strategies and risk management.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+    
+    <style>
+        :root {
+            --primary-bg: #0a0a0a;
+            --electric-blue: #00ffff;
+            --bright-cyan: #0ef6ff;
+            --neon-purple: #b026ff;
+            --deep-blue: #001a2e;
+            --text-primary: #ffffff;
+            --text-secondary: #e0e0e0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        /* Background with overlay */
+        .main-background {
+            background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(0,26,46,0.95) 100%),
+                        url('./assets/background.webp') center/cover no-repeat fixed;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        .main-background::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 20%, rgba(14, 246, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(176, 38, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .font-orbitron {
+            font-family: 'Orbitron', monospace;
+        }
+        
+        .font-rajdhani {
+            font-family: 'Rajdhani', sans-serif;
+        }
+        
+        .font-exo {
+            font-family: 'Exo 2', sans-serif;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.3);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, var(--electric-blue), var(--neon-purple));
+            border-radius: 4px;
+        }
+        
+        /* Enhanced Neon Glow */
+        .neon-glow {
+            color: var(--text-primary);
+            text-shadow: 0 0 15px var(--electric-blue), 0 0 30px rgba(0, 255, 255, 0.5);
+            animation: neonPulse 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes neonPulse {
+            from { 
+                text-shadow: 0 0 15px var(--electric-blue), 0 0 30px rgba(0, 255, 255, 0.5);
+            }
+            to { 
+                text-shadow: 0 0 20px var(--bright-cyan), 0 0 40px rgba(14, 246, 255, 0.6);
+            }
+        }
+        
+        /* Subtitle with crisp contrast */
+        .subtitle-glow {
+            color: var(--bright-cyan);
+            text-shadow: 0 0 10px rgba(14, 246, 255, 0.3);
+            font-weight: 500;
+        }
+        
+        /* Enhanced Button */
+        .cta-button {
+            background: transparent;
+            border: 2px solid var(--electric-blue);
+            color: var(--text-primary);
+            padding: 12px 32px;
+            border-radius: 8px;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .cta-button:hover::before {
+            left: 100%;
+        }
+        
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            background: rgba(0, 255, 255, 0.1);
+        }
+        
+        /* Navigation */
+        .nav-link {
+            position: relative;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 8px 16px;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--electric-blue);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        .nav-link:hover {
+            color: var(--electric-blue);
+        }
+        
+        .nav-link:hover::after {
+            width: 80%;
+        }
+        
+        /* Instagram Social Icon */
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid var(--electric-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .social-icon::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, var(--electric-blue), transparent);
+            transition: all 0.3s ease;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+        }
+        
+        .social-icon:hover::before {
+            width: 100px;
+            height: 100px;
+        }
+        
+        .social-icon:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
+        }
+        
+        .social-icon svg {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Skill Cards */
+        .skill-card {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .skill-card:hover::before {
+            left: 100%;
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
+            border-color: var(--electric-blue);
+        }
+        
+        /* Footer */
+        .footer {
+            border-top: 1px solid rgba(0, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .footer-text {
+            color: rgba(0, 255, 255, 0.7);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3rem;
+                line-height: 1.2;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .skill-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .cta-button {
+                padding: 10px 24px;
+                font-size: 1rem;
+            }
+        }
+        
+        /* Animation Classes */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .fade-in-left {
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+        
+        .fade-in-right {
+            opacity: 0;
+            transform: translateX(30px);
+        }
+        
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+        
+        /* Page Loader */
+        .page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        
+        .loader-text {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            color: var(--electric-blue);
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Page Loader -->
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-text">Initializing...</div>
+    </div>
+    
+    <!-- Main Background -->
+    <div class="main-background">
+        <!-- Navigation -->
+        <nav class="fixed top-0 w-full z-50 bg-black bg-opacity-40 backdrop-blur-md border-b border-gray-800">
+            <div class="container mx-auto px-6 py-4">
+                <div class="flex justify-between items-center">
+                    <div class="font-orbitron text-xl font-bold neon-glow">Aprian Ditia</div>
+                    <div class="nav-links hidden md:flex space-x-6">
+                        <a href="#home" class="nav-link">Home</a>
+                        <a href="#about" class="nav-link">About</a>
+                        <a href="#skills" class="nav-link">Skills</a>
+                        <a href="#vision" class="nav-link">Vision</a>
+                        <a href="#connect" class="nav-link">Connect</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Hero Section -->
+        <section id="home" class="min-h-screen flex items-center justify-center relative pt-20">
+            <div class="container mx-auto px-6 text-center relative z-10">
+                <div class="hero-content max-w-4xl mx-auto">
+                    <h1 class="hero-title font-orbitron text-5xl md:text-7xl font-black mb-6 neon-glow">
+                        Aprian Ditia
+                    </h1>
+                    <h2 class="hero-subtitle font-rajdhani text-xl md:text-2xl mb-8 subtitle-glow">
+                        Crypto Trader & Market Scalper
+                    </h2>
+                    <div class="hero-tagline mb-12">
+                        <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
+                            <span id="typed-text"></span>
+                        </p>
+                    </div>
+                    <div class="hero-cta">
+                        <button class="cta-button" onclick="scrollToSection('about')">
+                            Explore My Journey
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Scroll Indicator -->
+            <div class="scroll-indicator">
+                <div class="w-6 h-10 border-2 border-cyan-400 rounded-full flex justify-center">
+                    <div class="w-1 h-3 bg-cyan-400 rounded-full mt-2 animate-pulse"></div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- About Section -->
+        <section id="about" class="py-20 relative">
+            <div class="container mx-auto px-6">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="about-content fade-in-left">
+                        <h3 class="font-orbitron text-3xl md:text-4xl font-bold mb-6 text-purple-400">
+                            The Trader Behind the Screen
+                        </h3>
+                        <p class="text-gray-300 text-lg leading-relaxed mb-6">
+                            In the volatile world of cryptocurrency markets, precision meets intuition. I navigate the digital financial landscape with algorithmic precision and human insight, turning market chaos into calculated opportunities.
+                        </p>
+                        <p class="text-gray-300 text-lg leading-relaxed">
+                            Every trade is a decision backed by data, every scalp a testament to discipline. This is where technology meets finance, where bytes become value, where volatility becomes victory.
+                        </p>
+                    </div>
+                    <div class="about-image fade-in-right flex justify-center">
+                        <div class="relative">
+                            <img src="resources/avatar.jpg" alt="Aprian Ditia Avatar" class="w-80 h-80 rounded-lg avatar-image" style="border: 2px solid rgba(0, 255, 255, 0.3);">
+                            <div class="absolute inset-0 bg-gradient-to-r from-cyan-400 to-purple-500 opacity-20 rounded-lg"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Skills Section -->
+        <section id="skills" class="py-20 relative">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 fade-in-up">
+                    <h3 class="font-orbitron text-3xl md:text-4xl font-bold mb-6 text-cyan-400">
+                        Trading Mastery
+                    </h3>
+                    <p class="text-gray-300 text-xl max-w-3xl mx-auto">
+                        Precision, analysis, and automation converge in the art of digital asset trading
+                    </p>
+                </div>
+                
+                <div class="skill-grid grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="skill-card p-6 rounded-lg text-center scale-in">
+                        <div class="mb-4">
+                            <img src="https://kimi-web-img.moonshot.cn/img/cdn.pixabay.com/fcba466b6b7504b6e765f20485a4d7f394eff865.png" alt="Bitcoin" class="w-16 h-16 mx-auto crypto-icon">
+                        </div>
+                        <h4 class="font-rajdhani text-xl font-bold mb-2 text-cyan-400">Scalping Precision</h4>
+                        <p class="text-gray-400 text-sm">Micro-second execution with surgical accuracy</p>
+                    </div>
+                    
+                    <div class="skill-card p-6 rounded-lg text-center scale-in">
+                        <div class="mb-4">
+                            <img src="https://kimi-web-img.moonshot.cn/img/cdn.pixabay.com/84f9d409d7d1fc2c90fb6e48e705fea710b7b3d2.png" alt="Ethereum" class="w-16 h-16 mx-auto crypto-icon">
+                        </div>
+                        <h4 class="font-rajdhani text-xl font-bold mb-2 text-purple-400">Market Analysis</h4>
+                        <p class="text-gray-400 text-sm">Deep technical and fundamental insights</p>
+                    </div>
+                    
+                    <div class="skill-card p-6 rounded-lg text-center scale-in">
+                        <div class="mb-4">
+                            <img src="https://kimi-web-img.moonshot.cn/img/icons.iconarchive.com/23e4067c6558875a7bc102c789f6429a2e9f4858.png" alt="Binance" class="w-16 h-16 mx-auto crypto-icon">
+                        </div>
+                        <h4 class="font-rajdhani text-xl font-bold mb-2 text-yellow-400">Risk Management</h4>
+                        <p class="text-gray-400 text-sm">Calculated exposure with protective protocols</p>
+                    </div>
+                    
+                    <div class="skill-card p-6 rounded-lg text-center scale-in">
+                        <div class="mb-4">
+                            <div class="w-16 h-16 mx-auto bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full flex items-center justify-center">
+                                <span class="text-2xl">⚡</span>
+                            </div>
+                        </div>
+                        <h4 class="font-rajdhani text-xl font-bold mb-2 text-green-400">Automation & Strategy</h4>
+                        <p class="text-gray-400 text-sm">Algorithmic trading with human oversight</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Vision Section -->
+        <section id="vision" class="py-20 relative">
+            <div class="container mx-auto px-6 text-center">
+                <div class="max-w-4xl mx-auto fade-in-up">
+                    <h3 class="font-orbitron text-3xl md:text-4xl font-bold mb-12 text-purple-400">
+                        Trading Philosophy
+                    </h3>
+                    <blockquote class="text-2xl md:text-4xl font-light mb-8">
+                        <span class="text-cyan-400 glitch-text">"Discipline turns volatility into profit."</span>
+                    </blockquote>
+                    <p class="text-gray-300 text-xl leading-relaxed">
+                        In the chaos of digital markets, discipline is the compass that guides every decision. 
+                        Each trade is a calculated risk, each profit a testament to patience and precision.
+                    </p>
+                    <div class="mt-12 flex justify-center">
+                        <div class="w-32 h-1 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Connect Section -->
+        <section id="connect" class="py-20 relative">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 fade-in-up">
+                    <h3 class="font-orbitron text-3xl md:text-4xl font-bold mb-6 text-cyan-400">
+                        Connect & Collaborate
+                    </h3>
+                    <p class="text-gray-300 text-xl max-w-3xl mx-auto">
+                        Join the network of precision traders and market analysts
+                    </p>
+                </div>
+                
+                <div class="flex justify-center fade-in-up">
+                    <a href="#" class="social-icon" title="Instagram">
+                        <svg class="w-6 h-6 text-cyan-400" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container mx-auto px-6">
+                <p class="footer-text">
+                    © 2025 Aprian Ditia — All Rights Reserved.<br>
+                    Powered by Blockchain | Built on IPFS
+                </p>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- JavaScript -->
+    <script src="main.js"></script>
+</body>
+</html>
